@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.zdm.countdownview.MainActivity">
+
+    <com.zdm.lib_countdownview.CountDownView
+        android:id="@+id/countdownview"
+        android:gravity="center"
+        android:onClick="click"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:count_down_time="15"
+        app:type="zeroize"
+        app:start_text_color="@color/colorPrimary"
+        app:count_down_text_color="@color/colorAccent"
+        android:text="获取验证码"/>
+</RelativeLayout>
