@@ -3,7 +3,7 @@
 
 用法：
      <com.zdm.lib_countdownview.CountDownView
-                android:id="@+id/register_get_virification"
+                android:id="@+id/CountDownView"
                 android:layout_width="@dimen/px150"
                 android:layout_height="@dimen/px60"
                 android:layout_gravity="center"
@@ -31,7 +31,12 @@
             <attr name="end_text_color" format="color"/>
             <!--倒计时样式-->
             <attr name="type" format="enum">
-                <!--不足2位时 不补0-->
+                <!--时间不足2位时 不补0-- 10 9 ... >
                 <enum name="normal" value="0" />
+                 <!--时间不足2位时  补0-- 10 09 ...>
                 <enum name="zeroize" value="1" />
             </attr>
+
+开始倒计时：countDownView.startCounDownTime();
+
+页面销毁时调用：countDownView.stoptCounDownTime();

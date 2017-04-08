@@ -104,6 +104,10 @@ public class CountDownView extends TextView {
         temp_time=count_down_time;
     }
 
+    public void stopCounDownTime() {
+        temp_time=0;
+    }
+
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
