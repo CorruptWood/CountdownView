@@ -3,7 +3,7 @@
 
 ![image](https://github.com/CorruptWood/CountdownView/blob/master/coundown.gif?raw=true)
 
-Add it in your root build.gradle at the end of repositories:
+项目下的build.gradle添加：
 
 	allprojects {
 		repositories {
@@ -12,28 +12,55 @@ Add it in your root build.gradle at the end of repositories:
 		}
 	}
 
-Step 2. Add the dependency
+Module下的build.gradle添加：
 
 	dependencies {
-	      compile 'com.github.CorruptWood:CountdownView:1.0.6'
+	      compile 'com.github.CorruptWood:CountdownView:1.0.7'
 	}
+
+注意：
+
+	xml设置时间范围为1~99秒 不设置时间，默认30秒。
+	
+	不设置显示文字，默认:获取验证码 倒计时过程中文字默认显示为:剩余多少S  倒计时完成默认显示为：重新获取
+	
+	android:text 属性与 app:start_text 属性可以当作是同一个属性
+	
+	
 
 
 示例（使用AutoLayout做的适配）：
      
      <com.zdm.lib_countdownview.CountDownView
-                android:id="@+id/CountDownView"
-                android:layout_width="@dimen/px150"
-                android:layout_height="@dimen/px60"
-                android:layout_gravity="center"
-                android:layout_marginRight="@dimen/px20"
-                android:background="@mipmap/virification_bg"
-                android:gravity="center"
-                android:text="@string/get_virification"
-                android:textSize="@dimen/px24"
-                app:count_down_time="60"
-                app:start_text_color="@color/text_fff"
-                app:type="zeroize"/>
+        android:id="@+id/count_down1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="获取验证码"
+        app:count_down_text_color="@color/colorAccent"
+        app:count_down_time="15"
+        app:start_text_color="@color/colorPrimary"
+        app:type="zeroize"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimary"/>
+
+    <com.zdm.lib_countdownview.CountDownView
+        android:id="@+id/count_down2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="跳过"
+        app:count_down_text="跳过"
+        app:count_down_time="15"
+        app:end_text="跳过"
+        app:start_text_color="@color/colorAccent"
+        app:type="normal"/>
+
 
 属性：
       
@@ -57,15 +84,10 @@ Step 2. Add the dependency
                 <enum name="zeroize" value="1" />
             </attr>
 
-倒计时开始后默认显示 剩余多少s 
 
-倒计时结束后默认显示 重新获取
-
-
-
-开始倒计时：
+在你想开始倒计时的地方使用：
         
-        countDownView.startCounDownTime();
+    countDownView.startCounDownTime();
 
 页面销毁时调用(避免页面销毁时，倒计时仍在进行)：
     
