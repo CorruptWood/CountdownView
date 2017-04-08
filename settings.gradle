@@ -1,1 +1,1 @@
-include ':Sample', ':lib_countdownview'
+include ':Sample', ':countdownview'

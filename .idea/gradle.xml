@@ -10,7 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Sample" />
-            <option value="$PROJECT_DIR$/lib_countdownview" />
+            <option value="$PROJECT_DIR$/countdownview" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
