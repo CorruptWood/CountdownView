@@ -4,6 +4,20 @@
 
 ![image](https://github.com/CorruptWood/CountdownView/blob/master/coundown.gif?raw=true)
 
+Add it in your root build.gradle at the end of repositories:
+
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}Copy
+Step 2. Add the dependency
+
+	dependencies {
+	        compile 'com.github.CorruptWood:CountdownView:V1.0'
+	}
+
 示例（使用AutoLayout做的适配）：
      
      <com.zdm.lib_countdownview.CountDownView
