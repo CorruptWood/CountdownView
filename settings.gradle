@@ -1,1 +1,1 @@
-include ':app', ':lib_countdownview'
+include ':Sample', ':lib_countdownview'
