@@ -2,7 +2,7 @@
 用于单个View显示倒计时的情景，比如获取验证码...
 
 
-![image]((https://github.com/CorruptWood/CountdownView/coundown.gif)
+![image](https://github.com/CorruptWood/CountdownView/blob/master/coundown.gif?raw=true)
 
 示例（使用AutoLayout做的适配）：
      
