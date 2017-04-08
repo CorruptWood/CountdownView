@@ -1,4 +1,3 @@
 <resources>
     <string name="app_name">CountDownView</string>
-    <string name="count_down_text">重新获取%1$ss</string>
 </resources>

@@ -77,6 +77,8 @@ public class CountDownView extends TextView {
         //秒数不足2位时 是否补0 0表示不补齐
         type = typedArray.getInt(R.styleable.CountDownView_type, 0);
 
+        if(count_down_time>99) count_down_time=99;
+        if(count_down_time<=0) count_down_time=30;
 
         if(TextUtils.isEmpty(startText)){
             String text = this.getText().toString();
@@ -129,10 +131,9 @@ public class CountDownView extends TextView {
             }
             temp_time--;
             if(type==0){
-                setText(String.format(countDownText,String.valueOf(temp_time)));
+                setText(countDownText+temp_time+"s");
             }else {
-                setText(String.format(countDownText,String.valueOf((
-                        temp_time<10?"0"+temp_time:temp_time))));
+                setText(countDownText+(temp_time<10?"0"+temp_time:temp_time)+"s");
             }
             setTextColor(countDownTextColor);
             handler.postDelayed(this,1000);

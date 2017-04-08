@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">CountDownView</string>
-    <string name="count_down_text">剩余%1$ss</string>
+    <string name="count_down_text">剩余</string>
     <string name="end_text">重新获取</string>
 </resources>
