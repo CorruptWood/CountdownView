@@ -1,7 +1,11 @@
 # CountdownView
 用于单个View显示倒计时的情景，比如获取验证码...
 
-用法：
+
+![image](C:\Users\admin\Desktop\coundown.gif)
+
+示例（使用AutoLayout做的适配）：
+     
      <com.zdm.lib_countdownview.CountDownView
                 android:id="@+id/CountDownView"
                 android:layout_width="@dimen/px150"
@@ -17,6 +21,7 @@
                 app:type="zeroize"/>
 
 属性：
+      
       <!--倒计时-->
             <attr name="count_down_time" format="integer"/>
             <!--开始显示的文字-->
@@ -37,6 +42,21 @@
                 <enum name="zeroize" value="1" />
             </attr>
 
-开始倒计时：countDownView.startCounDownTime();
+倒计时开始后默认显示 剩余多少s 
 
-页面销毁时调用：countDownView.stoptCounDownTime();
+倒计时结束后默认显示 重新获取
+
+
+
+开始倒计时：
+        
+        countDownView.startCounDownTime();
+
+页面销毁时调用(避免页面销毁时，倒计时仍在进行)：
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+         countDownView.stoptCounDownTime();
+    }
+       
