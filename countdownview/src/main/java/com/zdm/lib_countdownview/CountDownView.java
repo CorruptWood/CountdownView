@@ -52,6 +52,23 @@ public class CountDownView extends TextView {
     private int countDownTextColor;
     private int endTextColor;
     private int type;
+    private static final int START = 0;
+    private static final int STOP = 1;
+    private OnCountDownStopListener listener;
+    //倒计时的状态
+    private boolean countDownStatus=false;
+
+    public void setOnStopListener(OnCountDownStopListener listener) {
+        this.listener = listener;
+    }
+
+    public boolean isCountDownStatus() {
+        return countDownStatus;
+    }
+
+    public void setCountDownStatus(boolean countDownStatus) {
+        this.countDownStatus = countDownStatus;
+    }
 
     public CountDownView(Context context) {
         this(context, null);
@@ -71,28 +88,30 @@ public class CountDownView extends TextView {
         countDownText = typedArray.getString(R.styleable.CountDownView_count_down_text);
         endText = typedArray.getString(R.styleable.CountDownView_end_text);
         //颜色
-        startTextColor = typedArray.getColor(R.styleable.CountDownView_start_text_color,Color.parseColor("#333333"));
+        startTextColor = typedArray.getColor(R.styleable.CountDownView_start_text_color, Color.parseColor("#333333"));
         countDownTextColor = typedArray.getColor(R.styleable.CountDownView_count_down_text_color, startTextColor);
         endTextColor = typedArray.getColor(R.styleable.CountDownView_end_text_color, startTextColor);
         //秒数不足2位时 是否补0 0表示不补齐
         type = typedArray.getInt(R.styleable.CountDownView_type, 0);
 
-        if(count_down_time>99) count_down_time=99;
-        if(count_down_time<=0) count_down_time=30;
+        if (count_down_time > 99)
+            count_down_time = 99;
+        if (count_down_time <= 0)
+            count_down_time = 30;
 
-        if(TextUtils.isEmpty(startText)){
+        if (TextUtils.isEmpty(startText)) {
             String text = this.getText().toString();
-            startText=text;
-        }else {
+            startText = text;
+        } else {
             setText(startText);
         }
 
-        if(TextUtils.isEmpty(countDownText)){
-            countDownText=context.getString(R.string.count_down_text);
+        if (TextUtils.isEmpty(countDownText)) {
+            countDownText = context.getString(R.string.count_down_text);
         }
 
-        if(TextUtils.isEmpty(endText)){
-            endText=context.getString(R.string.end_text);;
+        if (TextUtils.isEmpty(endText)) {
+            endText = context.getString(R.string.end_text);
         }
 
         setTextColor(startTextColor);
@@ -102,41 +121,55 @@ public class CountDownView extends TextView {
     }
 
     public void startCounDownTime() {
-        handler.obtainMessage().sendToTarget();
-        temp_time=count_down_time;
+        handler.obtainMessage(START).sendToTarget();
+        temp_time = count_down_time;
     }
 
     public void stopCounDownTime() {
-        temp_time=0;
+        temp_time = 0;
+        handler.obtainMessage(STOP).sendToTarget();
     }
 
-    Handler handler=new Handler(){
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            handler.postDelayed(countDownRunnable,0);
-            setClickable(false);
+            switch (msg.what) {
+                case START:
+                    handler.postDelayed(countDownRunnable, 0);
+                    countDownStatus=true;
+                    setClickable(false);
+                    break;
+                case STOP://倒计时结束监听
+                    handler.removeCallbacks(countDownRunnable);
+                    countDownStatus=false;
+                    if (listener != null) {
+                        listener.OnCountDownStop();
+                    }
+                    break;
+            }
         }
     };
 
-    Runnable countDownRunnable=new Runnable() {
+    Runnable countDownRunnable = new Runnable() {
         @Override
         public void run() {
-            if(temp_time<=1){
+            if (temp_time <= 1) {
                 handler.removeCallbacks(this);
                 setClickable(true);
                 setText(endText);
                 setTextColor(endTextColor);
+                handler.obtainMessage(STOP).sendToTarget();
                 return;
             }
             temp_time--;
-            if(type==0){
-                setText(countDownText+temp_time+"s");
-            }else {
-                setText(countDownText+(temp_time<10?"0"+temp_time:temp_time)+"s");
+            if (type == 0) {
+                setText(countDownText + temp_time + "s");
+            } else {
+                setText(countDownText + (temp_time < 10 ? "0" + temp_time : temp_time) + "s");
             }
             setTextColor(countDownTextColor);
-            handler.postDelayed(this,1000);
+            handler.postDelayed(this, 1000);
         }
     };
 }
