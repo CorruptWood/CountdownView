@@ -1,10 +1,6 @@
 # CountdownView
 用于单个View显示倒计时的情景，比如获取验证码...
 
-
-<<<<<<< HEAD
-![image](C:\Users\admin\Desktop\coundown.gif)
-=======
 ![image](https://github.com/CorruptWood/CountdownView/blob/master/coundown.gif?raw=true)
 
 Add it in your root build.gradle at the end of repositories:
@@ -14,13 +10,14 @@ Add it in your root build.gradle at the end of repositories:
 			...
 			maven { url 'https://jitpack.io' }
 		}
-	}Copy
+	}
+
 Step 2. Add the dependency
 
 	dependencies {
-	        compile 'com.github.CorruptWood:CountdownView:V1.0'
+	        compile 'com.github.CorruptWood:CountdownView:1.0.0'
 	}
->>>>>>> origin/master
+
 
 示例（使用AutoLayout做的适配）：
      
@@ -77,8 +74,4 @@ Step 2. Add the dependency
         super.onDestroy();
          countDownView.stoptCounDownTime();
     }
-<<<<<<< HEAD
-       
-=======
-       
->>>>>>> origin/master
+
