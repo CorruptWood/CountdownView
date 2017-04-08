@@ -15,7 +15,7 @@
 Module下的build.gradle添加：
 
 	dependencies {
-	      compile 'com.github.CorruptWood:CountdownView:1.0.7'
+	      compile 'com.github.CorruptWood:CountdownView:1.0.8'
 	}
 
 注意：
@@ -97,3 +97,11 @@ Module下的build.gradle添加：
          countDownView.stoptCounDownTime();
     }
 
+结束监听：
+
+	countDown.setOnStopListener(new OnCountDownStopListener() {
+            @Override
+            public void OnCountDownStop() {
+                
+            }
+        });
