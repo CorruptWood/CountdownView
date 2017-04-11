@@ -54,6 +54,7 @@
         app:count_down_text="跳过"
         app:count_down_time="15"
         app:end_text="跳过"
+        app:isClickable="true"
         app:start_text_color="@color/colorAccent"
         app:type="normal"/>
 

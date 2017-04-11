@@ -19,6 +19,8 @@
             <enum name="normal" value="0" />
             <enum name="zeroize" value="1" />
         </attr>
+        <!--//倒计时的过程中是否可点击 默认false-->
+        <attr name="isClickable" format="boolean"/>
 
     </declare-styleable>
 </resources>

@@ -56,7 +56,8 @@ public class CountDownView extends TextView {
     private static final int STOP = 1;
     private OnCountDownStopListener listener;
     //倒计时的状态
-    private boolean countDownStatus=false;
+    private boolean countDownStatus = false;
+    private boolean isClickable;
 
     public void setOnStopListener(OnCountDownStopListener listener) {
         this.listener = listener;
@@ -94,6 +95,11 @@ public class CountDownView extends TextView {
         //秒数不足2位时 是否补0 0表示不补齐
         type = typedArray.getInt(R.styleable.CountDownView_type, 0);
 
+        isClickable = typedArray.getBoolean(R.styleable.CountDownView_isClickable, false);
+
+        //释放资源
+        typedArray.recycle();
+
         if (count_down_time > 99)
             count_down_time = 99;
         if (count_down_time <= 0)
@@ -116,8 +122,6 @@ public class CountDownView extends TextView {
 
         setTextColor(startTextColor);
 
-        //释放资源
-        typedArray.recycle();
     }
 
     public void startCounDownTime() {
@@ -137,12 +141,15 @@ public class CountDownView extends TextView {
             switch (msg.what) {
                 case START:
                     handler.postDelayed(countDownRunnable, 0);
-                    countDownStatus=true;
-                    setClickable(false);
+                    countDownStatus = true;
+                    if (!isClickable)
+                        setClickable(false);
                     break;
                 case STOP://倒计时结束监听
-                    handler.removeCallbacks(countDownRunnable);
-                    countDownStatus=false;
+//                    handler.removeCallbacks(countDownRunnable);
+                    countDownStatus = false;
+                    if (!isClickable)
+                        setClickable(true);
                     if (listener != null) {
                         listener.OnCountDownStop();
                     }
@@ -155,21 +162,24 @@ public class CountDownView extends TextView {
         @Override
         public void run() {
             if (temp_time <= 1) {
-                handler.removeCallbacks(this);
-                setClickable(true);
                 setText(endText);
                 setTextColor(endTextColor);
                 handler.obtainMessage(STOP).sendToTarget();
+                handler.removeCallbacks(this);
                 return;
             }
             temp_time--;
-            if (type == 0) {
-                setText(countDownText + temp_time + "s");
-            } else {
-                setText(countDownText + (temp_time < 10 ? "0" + temp_time : temp_time) + "s");
-            }
+            setCountDownViewText();
             setTextColor(countDownTextColor);
             handler.postDelayed(this, 1000);
         }
     };
+
+    private void setCountDownViewText() {
+        if (type == 0) {
+            setText(countDownText + temp_time + "s");
+        } else {
+            setText(countDownText + (temp_time < 10 ? "0" + temp_time : temp_time) + "s");
+        }
+    }
 }

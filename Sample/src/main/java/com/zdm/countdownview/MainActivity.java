@@ -1,7 +1,6 @@
 package com.zdm.countdownview;
 
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -24,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         countDown2 = ((CountDownView) findViewById(R.id.count_down2));
         countDown3 = ((CountDownView) findViewById(R.id.count_down3));
 
+        //没设置倒计时过程中可点击  该方法不生效
         countDown1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,20 +36,27 @@ public class MainActivity extends AppCompatActivity {
         countDown2.setOnStopListener(new OnCountDownStopListener() {
             @Override
             public void OnCountDownStop() {
-                if(countDown1.isCountDownStatus()){
-                    countDown1.stopCounDownTime();
-                    Toast.makeText(MainActivity.this,"我的倒计时停止了",Toast.LENGTH_SHORT).show();
-                    SystemClock.sleep(2000);
+                if(!countDown1.isCountDownStatus()){
                     countDown1.startCounDownTime();
-                    Toast.makeText(MainActivity.this,"我又开始倒计时了",Toast.LENGTH_SHORT).show();
-                }else {
-                    countDown1.startCounDownTime();
-                    Toast.makeText(MainActivity.this,"我开始倒计时了",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"countDown2开启了countDown1的倒计时",Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
         countDown3.startCounDownTime();
+
+        countDown3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this,"countDown3被点击了",Toast.LENGTH_SHORT).show();
+
+                if(countDown1.isCountDownStatus()){
+                    Toast.makeText(MainActivity.this,"countDown1正在倒计时,并且被countDown3停止了",Toast.LENGTH_SHORT).show();
+                    countDown1.stopCounDownTime();
+                    countDown2.startCounDownTime();
+                }
+            }
+        });
     }
 
 
