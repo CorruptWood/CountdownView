@@ -15,7 +15,7 @@
 Module下的build.gradle添加：
 
 	dependencies {
-	      compile 'com.github.CorruptWood:CountdownView:1.0.8'
+	      compile 'com.github.CorruptWood:CountdownView:1.0.9'
 	}
 
 注意：
