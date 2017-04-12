@@ -5,7 +5,10 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -58,6 +61,7 @@ public class CountDownView extends TextView {
     //倒计时的状态
     private boolean countDownStatus = false;
     private boolean isClickable;
+    private int countDownTimeColor;
 
     public void setOnStopListener(OnCountDownStopListener listener) {
         this.listener = listener;
@@ -96,6 +100,8 @@ public class CountDownView extends TextView {
         type = typedArray.getInt(R.styleable.CountDownView_type, 0);
 
         isClickable = typedArray.getBoolean(R.styleable.CountDownView_isClickable, false);
+
+        countDownTimeColor = typedArray.getColor(R.styleable.CountDownView_count_down_color, countDownTextColor);
 
         //释放资源
         typedArray.recycle();
@@ -170,16 +176,29 @@ public class CountDownView extends TextView {
             }
             temp_time--;
             setCountDownViewText();
-            setTextColor(countDownTextColor);
             handler.postDelayed(this, 1000);
         }
     };
 
     private void setCountDownViewText() {
+        String temp="";
         if (type == 0) {
-            setText(countDownText + temp_time + "s");
+            temp=String.valueOf(temp_time);
+//            setText(countDownText + temp_time + "s");
         } else {
-            setText(countDownText + (temp_time < 10 ? "0" + temp_time : temp_time) + "s");
+            temp=String.valueOf(temp_time < 10 ? "0" + temp_time : temp_time);
+//            setText(countDownText + (temp_time < 10 ? "0" + temp_time : temp_time) + "s");
+        }
+        String string = String.format(countDownText, temp);
+        if(countDownTextColor!=startTextColor){
+            SpannableString format=new SpannableString(string);
+            //倒计时的索引位置
+            int indexOf = string.indexOf(temp);
+            format.setSpan(new ForegroundColorSpan(countDownTextColor), indexOf, indexOf+temp.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            setText(format);
+        }else {
+            setTextColor(countDownTextColor);
+            setText(string);
         }
     }
 }

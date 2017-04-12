@@ -5,7 +5,7 @@
         <attr name="count_down_time" format="integer"/>
         <!--开始显示的文字-->
         <attr name="start_text" format="string"/>
-        <!--倒计时显示的文字-->
+        <!--倒计时显示的文字    使用占位符表示-->
         <attr name="count_down_text" format="string"/>
         <!--倒计时结束显示的文字-->
         <attr name="end_text" format="string"/>
@@ -21,6 +21,8 @@
         </attr>
         <!--//倒计时的过程中是否可点击 默认false-->
         <attr name="isClickable" format="boolean"/>
+        <!--倒计时颜色-->
+        <attr name="count_down_color" format="color"/>
 
     </declare-styleable>
 </resources>
