@@ -101,7 +101,7 @@ public class CountDownView extends TextView {
 
         isClickable = typedArray.getBoolean(R.styleable.CountDownView_isClickable, false);
 
-        countDownTimeColor = typedArray.getColor(R.styleable.CountDownView_count_down_color, countDownTextColor);
+        countDownTimeColor = typedArray.getColor(R.styleable.CountDownView_count_down_time_color, countDownTextColor);
 
         //释放资源
         typedArray.recycle();
@@ -190,11 +190,12 @@ public class CountDownView extends TextView {
 //            setText(countDownText + (temp_time < 10 ? "0" + temp_time : temp_time) + "s");
         }
         String string = String.format(countDownText, temp);
-        if(countDownTextColor!=startTextColor){
+        if(countDownTextColor!=countDownTimeColor){
             SpannableString format=new SpannableString(string);
             //倒计时的索引位置
             int indexOf = string.indexOf(temp);
-            format.setSpan(new ForegroundColorSpan(countDownTextColor), indexOf, indexOf+temp.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            format.setSpan(new ForegroundColorSpan(countDownTextColor), 0, format.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            format.setSpan(new ForegroundColorSpan(countDownTimeColor), indexOf, indexOf+temp.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             setText(format);
         }else {
             setTextColor(countDownTextColor);

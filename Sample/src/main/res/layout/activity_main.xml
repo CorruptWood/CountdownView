@@ -53,6 +53,7 @@
         android:text="跳过"
         app:count_down_text="跳过%1$s s"
         app:count_down_text_color="@color/colorPrimary"
+        app:count_down_time_color="#ff6633"
         app:count_down_time="15"
         app:end_text="跳过"
         app:isClickable="true"

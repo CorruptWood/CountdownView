@@ -22,7 +22,7 @@
         <!--//倒计时的过程中是否可点击 默认false-->
         <attr name="isClickable" format="boolean"/>
         <!--倒计时颜色-->
-        <attr name="count_down_color" format="color"/>
+        <attr name="count_down_time_color" format="color"/>
 
     </declare-styleable>
 </resources>
