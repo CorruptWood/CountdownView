@@ -1,5 +1,5 @@
 # CountdownView
-用于单个View显示倒计时的情景，比如获取验证码...
+用于界面跳过倒计时、获取验证码倒计时，可单独设置倒计时的时间、开始、结束的回调监听.......
 
 ![image](https://github.com/CorruptWood/CountdownView/blob/master/coundown.gif?raw=true)
 
@@ -104,7 +104,16 @@ Demo示例（使用AutoLayout做的适配）：
          countDownView.stoptCounDownTime();
     }
 
-结束监听：
+倒计时开始的回调监听：
+
+	countDown.setOnStartListener(new OnCountDownStartListener() {
+            @Override
+            public void OnCountDownStart() {
+                setLoger("countDown5倒计时开始了");
+            }
+        });
+
+倒计时结束的回调监听：
 
 	countDown.setOnStopListener(new OnCountDownStopListener() {
             @Override
