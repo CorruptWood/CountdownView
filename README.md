@@ -15,7 +15,7 @@
 Module下的build.gradle添加：
 
 	dependencies {
-	      compile 'com.github.CorruptWood:CountdownView:1.0.9'
+	      compile 'com.github.CorruptWood:CountdownView:1.1.1'
 	}
 
 注意：
@@ -26,40 +26,47 @@ Module下的build.gradle添加：
 	
 	android:text 属性与 app:start_text 属性可以当作是同一个属性
 	
+	倒计时文字务必使用占位符设置，可灵活处理时间显示在前或在后
+	
+	更可以单独设置倒计时时间的颜色
+	
+	app:count_down_time_color="#ff6633"
+	
 	
 
 
-示例（使用AutoLayout做的适配）：
+Demo示例（使用AutoLayout做的适配）：
      
-     <com.zdm.lib_countdownview.CountDownView
-        android:id="@+id/count_down1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="获取验证码"
-        app:count_down_text_color="@color/colorAccent"
-        app:count_down_time="15"
-        app:start_text_color="@color/colorPrimary"
-        app:type="zeroize"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/colorPrimary"/>
-
     <com.zdm.lib_countdownview.CountDownView
-        android:id="@+id/count_down2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="跳过"
-        app:count_down_text="跳过"
-        app:count_down_time="15"
-        app:end_text="跳过"
-        app:start_text_color="@color/colorAccent"
-        app:type="normal"/>
+            android:id="@+id/count_down4"
+            android:layout_width="280px"
+            android:layout_height="60px"
+            android:layout_margin="20px"
+            android:background="@drawable/text_shape_two"
+            android:gravity="center"
+            android:text="跳过"
+            app:count_down_text="@string/skip1"   //  跳过 %1$s
+            app:count_down_time="80"
+            app:isClickable="true"
+            app:start_text_color="#999"
+            app:type="zeroize"/>
+
+
+        <com.zdm.lib_countdownview.CountDownView
+            android:id="@+id/count_down5"
+            android:layout_width="140px"
+            android:layout_height="60px"
+            android:layout_margin="20px"
+            android:background="@drawable/text_shape_two"
+            android:gravity="center"
+            android:text="跳过"
+            app:count_down_text="@string/skip2"   //  %1$s 跳过 
+            app:count_down_text_color="#999"
+            app:count_down_time="15"
+            app:count_down_time_color="#ff6633"
+            app:end_text="跳过"
+            app:start_text_color="#999"
+            app:type="normal"/>
 
 
 属性：
