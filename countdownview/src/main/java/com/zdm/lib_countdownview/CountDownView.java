@@ -57,14 +57,20 @@ public class CountDownView extends TextView {
     private int type;
     private static final int START = 0;
     private static final int STOP = 1;
-    private OnCountDownStopListener listener;
+    private OnCountDownStopListener stopListener;
+    private OnCountDownStartListener startListener;
     //倒计时的状态
     private boolean countDownStatus = false;
     private boolean isClickable;
     private int countDownTimeColor;
 
+
+    public void setOnStartListener(OnCountDownStartListener startListener) {
+        this.startListener = startListener;
+    }
+
     public void setOnStopListener(OnCountDownStopListener listener) {
-        this.listener = listener;
+        this.stopListener = listener;
     }
 
     public boolean isCountDownStatus() {
@@ -123,21 +129,11 @@ public class CountDownView extends TextView {
         }
 
         if (TextUtils.isEmpty(endText)) {
-            endText = context.getString(R.string.end_text);
+            endText = startText;
         }
 
         setTextColor(startTextColor);
 
-    }
-
-    public void startCounDownTime() {
-        handler.obtainMessage(START).sendToTarget();
-        temp_time = count_down_time;
-    }
-
-    public void stopCounDownTime() {
-        temp_time = 0;
-        handler.obtainMessage(STOP).sendToTarget();
     }
 
     Handler handler = new Handler() {
@@ -150,14 +146,16 @@ public class CountDownView extends TextView {
                     countDownStatus = true;
                     if (!isClickable)
                         setClickable(false);
+                    if (startListener != null) {
+                        startListener.OnCountDownStart();
+                    }
                     break;
                 case STOP://倒计时结束监听
-//                    handler.removeCallbacks(countDownRunnable);
                     countDownStatus = false;
                     if (!isClickable)
                         setClickable(true);
-                    if (listener != null) {
-                        listener.OnCountDownStop();
+                    if (stopListener != null) {
+                        stopListener.OnCountDownStop();
                     }
                     break;
             }
@@ -184,10 +182,8 @@ public class CountDownView extends TextView {
         String temp="";
         if (type == 0) {
             temp=String.valueOf(temp_time);
-//            setText(countDownText + temp_time + "s");
         } else {
             temp=String.valueOf(temp_time < 10 ? "0" + temp_time : temp_time);
-//            setText(countDownText + (temp_time < 10 ? "0" + temp_time : temp_time) + "s");
         }
         String string = String.format(countDownText, temp);
         if(countDownTextColor!=countDownTimeColor){
@@ -201,5 +197,30 @@ public class CountDownView extends TextView {
             setTextColor(countDownTextColor);
             setText(string);
         }
+    }
+
+
+    /**
+     * 开始倒计时
+     */
+    public void startCounDownTime() {
+        handler.obtainMessage(START).sendToTarget();
+        temp_time = count_down_time;
+    }
+
+    /**
+     * 结束倒计时
+     */
+    public void stopCounDownTime() {
+        temp_time = 0;
+        handler.obtainMessage(STOP).sendToTarget();
+    }
+
+
+    /**
+     * 获取当前倒计时的时间
+     */
+    public int getCountDownTime(){
+        return temp_time;
     }
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CountDownView</string>
+    <string name="skip1">跳过 %1$s</string>
+    <string name="skip2">%1$s 跳过</string>
 </resources>
