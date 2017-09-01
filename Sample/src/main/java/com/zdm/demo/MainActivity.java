@@ -27,8 +27,6 @@ public class MainActivity extends AutoLayoutActivity {
     CountDownView countDown3;
     @InjectView(R.id.count_down4)
     CountDownView countDown4;
-    @InjectView(R.id.count_down5)
-    CountDownView countDown5;
     @InjectView(R.id.loger)
     TextView loger;
     @InjectView(R.id.clean)
@@ -80,13 +78,6 @@ public class MainActivity extends AutoLayoutActivity {
             }
         });
 
-        countDown5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                countDown5.startCounDownTime();
-            }
-        });
-
 
         countDown4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +86,8 @@ public class MainActivity extends AutoLayoutActivity {
                         + countDown4.isCountDownStatus() + "倒计时时间剩余：" + countDown4.getCountDownTime());
                 setLoger("countDown4当前的倒计时状态为："
                         + countDown4.isCountDownStatus() + "倒计时时间剩余：" + countDown4.getCountDownTime());
+
+                countDown4.stopCounDownTime();
             }
         });
 
@@ -128,15 +121,6 @@ public class MainActivity extends AutoLayoutActivity {
             }
         });
 
-        countDown5.setOnStartListener(new OnCountDownStartListener() {
-            @Override
-            public void OnCountDownStart() {
-                setLoger("countDown5倒计时开始了");
-            }
-        });
-
-
-
         //倒计时结束回调
         countDown1.setOnStopListener(new OnCountDownStopListener() {
             @Override
@@ -165,17 +149,10 @@ public class MainActivity extends AutoLayoutActivity {
                 setLoger("countDown4倒计时结束了");
             }
         });
-
-        countDown5.setOnStopListener(new OnCountDownStopListener() {
-            @Override
-            public void OnCountDownStop() {
-                setLoger("countDown5倒计时结束了");
-            }
-        });
     }
 
     //设置日志文件
-    StringBuffer buf ;
+    StringBuffer buf;
 
     private void setLoger(String text) {
         String oldText = loger.getText().toString();
@@ -203,8 +180,6 @@ public class MainActivity extends AutoLayoutActivity {
             countDown3.stopCounDownTime();
         if (countDown4 != null && countDown4.isCountDownStatus())
             countDown4.stopCounDownTime();
-        if (countDown5 != null && countDown5.isCountDownStatus())
-            countDown5.stopCounDownTime();
     }
 
     //清除日志

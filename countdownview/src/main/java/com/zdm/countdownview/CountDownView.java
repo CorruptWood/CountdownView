@@ -9,6 +9,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
 
 
@@ -77,21 +78,6 @@ public class CountDownView extends TextView {
         this.countDownTime = time;
     }
 
-    public void setStartText(String startText) {
-        this.startText = startText;
-        invalidate();
-    }
-
-    public void setEndText(String endText) {
-        this.endText = endText;
-        invalidate();
-    }
-
-    public void setCountDownText(String countDownText) {
-        this.countDownText = countDownText;
-        invalidate();
-    }
-
     public void setType(int type) {
         this.type = type;
     }
@@ -132,17 +118,16 @@ public class CountDownView extends TextView {
         @Override
         public void run() {
             if (countDownStatus) {
+                tempTime--;
                 if (tempTime <= 0) {
                     stopCounDownTime();
                     return;
                 }
-                tempTime--;
                 setCountDownViewText();
+                Log.e("-----------------","tempTime："+tempTime);
                 handler.postDelayed(this, 1000);
             } else {
                 handler.removeCallbacks(this);
-                setText(endText);
-                setTextColor(endTextColor);
                 if (stopListener != null) {
                     stopListener.OnCountDownStop();
                 }
@@ -150,7 +135,7 @@ public class CountDownView extends TextView {
         }
     };
 
-    private void setCountDownViewText() {
+    public void setCountDownViewText() {
         String temp;
         if (type == 0) {
             temp = String.valueOf(tempTime);
@@ -180,7 +165,7 @@ public class CountDownView extends TextView {
         tempTime = countDownTime;
         initView();
         handler.removeCallbacks(countDownRunnable);
-        handler.postDelayed(countDownRunnable, 1000);
+        handler.postDelayed(countDownRunnable, 0);
         if (startListener != null)
             startListener.OnCountDownStart();
     }
@@ -202,6 +187,7 @@ public class CountDownView extends TextView {
             endText = startText;
         }
 
+        Log.e("-----------------","startText:"+startText+";countDownText:"+countDownText+";endText:"+endText);
         setTextColor(startTextColor);
     }
 
@@ -210,9 +196,8 @@ public class CountDownView extends TextView {
      */
     public void stopCounDownTime() {
         countDownStatus = false;
-        if (stopListener != null) {
-            stopListener.OnCountDownStop();
-        }
+        setText(endText);
+        setTextColor(endTextColor);
     }
 
 
