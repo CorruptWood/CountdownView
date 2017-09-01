@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zdm.countdownview.MainActivity">
+    tools:context="com.zdm.demo.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.zdm.lib_countdownview.CountDownView
+        <com.zdm.countdownview.CountDownView
             android:id="@+id/count_down1"
             android:layout_width="180px"
             android:layout_height="80px"
@@ -25,7 +25,7 @@
             app:start_text_color="@color/colorPrimary"
             app:type="zeroize"/>
 
-        <com.zdm.lib_countdownview.CountDownView
+        <com.zdm.countdownview.CountDownView
             android:id="@+id/count_down2"
             android:layout_width="180px"
             android:layout_height="80px"
@@ -38,7 +38,7 @@
             app:start_text_color="@color/colorPrimary"
             app:type="normal"/>
 
-        <com.zdm.lib_countdownview.CountDownView
+        <com.zdm.countdownview.CountDownView
             android:id="@+id/count_down3"
             android:layout_width="180px"
             android:layout_height="80px"
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.zdm.lib_countdownview.CountDownView
+        <com.zdm.countdownview.CountDownView
             android:id="@+id/count_down4"
             android:layout_width="280px"
             android:layout_height="60px"
@@ -76,11 +76,10 @@
             android:text="跳过"
             app:count_down_text="@string/skip1"
             app:count_down_time="80"
-            app:isClickable="true"
             app:start_text_color="#999"
             app:type="zeroize"/>
 
-        <com.zdm.lib_countdownview.CountDownView
+        <com.zdm.countdownview.CountDownView
             android:id="@+id/count_down5"
             android:layout_width="140px"
             android:layout_height="60px"

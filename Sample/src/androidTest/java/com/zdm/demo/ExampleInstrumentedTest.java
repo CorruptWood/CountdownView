@@ -1,4 +1,4 @@
-package com.zdm.countdownview;
+package com.zdm.demo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package com.zdm.lib_countdownview;
+package com.zdm.countdownview;
 
 /**
  * ......................我佛慈悲....................

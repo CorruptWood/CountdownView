@@ -1,4 +1,4 @@
-package com.zdm.countdownview;
+package com.zdm.demo;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -7,9 +7,9 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
-import com.zdm.lib_countdownview.CountDownView;
-import com.zdm.lib_countdownview.OnCountDownStartListener;
-import com.zdm.lib_countdownview.OnCountDownStopListener;
+import com.zdm.countdownview.CountDownView;
+import com.zdm.countdownview.OnCountDownStartListener;
+import com.zdm.countdownview.OnCountDownStopListener;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import butterknife.ButterKnife;
@@ -54,13 +54,40 @@ public class MainActivity extends AutoLayoutActivity {
 
     private void init() {
         //开始倒计时
-        countDown1.startCounDownTime();
-        countDown2.startCounDownTime();
-        countDown3.startCounDownTime();
+        countDown1.setCountDownTime(30);
+        countDown2.setCountDownTime(20);
+        countDown3.setCountDownTime(40);
         countDown4.startCounDownTime();
-        countDown5.startCounDownTime();
 
-        //countDown4 设有属性app:isClickable="true" 可以在倒计时的过程中响应点击事件
+        countDown1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countDown1.startCounDownTime();
+            }
+        });
+
+        countDown2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countDown2.startCounDownTime();
+            }
+        });
+
+        countDown3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countDown3.startCounDownTime();
+            }
+        });
+
+        countDown5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countDown5.startCounDownTime();
+            }
+        });
+
+
         countDown4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +142,6 @@ public class MainActivity extends AutoLayoutActivity {
             @Override
             public void OnCountDownStop() {
                 setLoger("countDown1倒计时结束了");
-                countDown1.startCounDownTime();
             }
         });
 
@@ -123,7 +149,6 @@ public class MainActivity extends AutoLayoutActivity {
             @Override
             public void OnCountDownStop() {
                 setLoger("countDown2倒计时结束了");
-                countDown2.startCounDownTime();
             }
         });
 
@@ -131,7 +156,6 @@ public class MainActivity extends AutoLayoutActivity {
             @Override
             public void OnCountDownStop() {
                 setLoger("countDown3倒计时结束了");
-                countDown3.startCounDownTime();
             }
         });
 
@@ -139,7 +163,6 @@ public class MainActivity extends AutoLayoutActivity {
             @Override
             public void OnCountDownStop() {
                 setLoger("countDown4倒计时结束了");
-                countDown4.startCounDownTime();
             }
         });
 
@@ -147,7 +170,6 @@ public class MainActivity extends AutoLayoutActivity {
             @Override
             public void OnCountDownStop() {
                 setLoger("countDown5倒计时结束了");
-                countDown5.startCounDownTime();
             }
         });
     }
